@@ -28,6 +28,13 @@ const GitHubSearch: React.FC = () => {
   const [loadingUsers, setUsersLoading] = useState(false);
   const [loadingRepos, setReposLoading] = useState(false);
 
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
   const handleSearch = async () => {
     setUsersLoading(true);
     const result = await searchUsers(username);
@@ -76,14 +83,25 @@ const GitHubSearch: React.FC = () => {
 
       <List>
         {users.map((user, key) => (
-          <Accordion key={`${key}-${user}`}>
+          <Accordion
+            key={`${key}-accordion-${user}`}
+            expanded={expanded === `panel${key + 1}`}
+            onChange={handleChange(`panel${key + 1}`)}
+            style={{ marginBottom: 5 }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
+              aria-controls="panel-content"
+              id="panel-header"
               onClick={() => handleUserClick(user)}
             >
-              {user}
+              <Typography
+                variant="subtitle1"
+                component="p"
+                key={`${key}-usernme-${user}`}
+              >
+                {user}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               {loadingRepos ? (
@@ -92,10 +110,24 @@ const GitHubSearch: React.FC = () => {
                 </div>
               ) : (
                 repos.map(({ userName, repositories }) => {
-                  return userName === user && repositories ? (
+                  if (userName === user && repositories.length === 0) {
+                    return (
+                      <Typography
+                        key={`${key}-error-message-${user}`}
+                        variant="body2"
+                        color="text.secondary"
+                      >
+                        Sorry! Repositories not found from this user.
+                      </Typography>
+                    );
+                  }
+
+                  return (
+                    userName === user &&
+                    repositories.length > 0 &&
                     repositories.map((repository: any, index: number) => (
                       <Card
-                        key={`${index}-${repository.name}`}
+                        key={`${index}-item-${repository.name}`}
                         sx={{ marginBottom: 2, backgroundColor: '#e0e0e0' }}
                       >
                         <CardContent
@@ -127,10 +159,6 @@ const GitHubSearch: React.FC = () => {
                         </CardContent>
                       </Card>
                     ))
-                  ) : (
-                    <Typography variant="body2" component="p">
-                      There are no repositories for this user
-                    </Typography>
                   );
                 })
               )}

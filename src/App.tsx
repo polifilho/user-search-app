@@ -1,14 +1,11 @@
-import React from 'react';
-import GitHubSearch from './components/GitHubSearch';
+import Home from './views/Home';
 import { Container } from '@mui/material';
 
-function App() {
-  return (
-    <Container maxWidth="md">
-      <h1>GitHub User Search</h1>
-      <GitHubSearch />
-    </Container>
-  );
-}
+const App = () => (
+  <Container maxWidth="md">
+    <h1>GitHub User Search</h1>
+    <Home />
+  </Container>
+);
 
 export default App;

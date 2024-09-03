@@ -12,6 +12,7 @@ import {
   Box,
   IconButton,
 } from '@mui/material';
+import { CONTENT } from '../communs';
 
 const UserRepositories = ({
   user,
@@ -59,7 +60,7 @@ const UserRepositories = ({
                 variant="body2"
                 color="text.secondary"
               >
-                Sorry! Repositories not found from this user.
+                {CONTENT.user.repositories.errorMessage}
               </Typography>
             );
           }
@@ -117,7 +118,7 @@ const UserRepositories = ({
                 )
               }
             >
-              Load More
+              {CONTENT.user.repositories.errorMessage}
             </Button>
           );
         }

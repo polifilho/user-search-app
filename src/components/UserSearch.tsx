@@ -1,4 +1,6 @@
 import { UserSearchType } from '../types';
+import { CONTENT } from '../communs';
+
 import {
   TextField,
   Button,
@@ -19,7 +21,7 @@ const UserSearch = ({
       <Grid item xs={12}>
         <TextField
           fullWidth
-          label="GitHub Username"
+          label={CONTENT.search.placeholder}
           variant="outlined"
           value={username}
           onChange={(e) => handleChangeUserName(e.target.value)}
@@ -27,7 +29,7 @@ const UserSearch = ({
       </Grid>
       {errorMessage && (
         <Grid item xs={12}>
-          <Alert severity="error">Please, set username!</Alert>
+          <Alert severity="error">{CONTENT.search.errorUser}</Alert>
         </Grid>
       )}
       <Grid item xs={12}>
@@ -38,7 +40,11 @@ const UserSearch = ({
           onClick={handleSearch}
           disabled={loadingUsers}
         >
-          {loadingUsers ? <CircularProgress size={24} /> : 'Search'}
+          {loadingUsers ? (
+            <CircularProgress size={24} />
+          ) : (
+            CONTENT.search.button
+          )}
         </Button>
       </Grid>
     </Grid>

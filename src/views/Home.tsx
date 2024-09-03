@@ -40,7 +40,6 @@ const Home: React.FC = () => {
         handleChangeUserName={handleChangeUserName}
         handleSearch={handleSearch}
       />
-
       <UserItem users={users} repos={repos} setRepos={setRepos} />
     </Grid>
   );

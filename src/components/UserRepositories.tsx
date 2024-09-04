@@ -118,7 +118,7 @@ const UserRepositories = ({
                 )
               }
             >
-              {CONTENT.user.repositories.errorMessage}
+              {CONTENT.commons.loadMore}
             </Button>
           );
         }

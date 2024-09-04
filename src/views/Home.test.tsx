@@ -2,8 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from './Home';
 
-test('renders learn react link', () => {
+test('renders TextField and Button', () => {
   render(<Home />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  const textFieldElement = screen.getByRole('textbox', { name: /GitHub Username/i });
+  expect(textFieldElement).toBeInTheDocument();
+
+  const buttonElement = screen.getByRole('button', { name: /search/i });
+  expect(buttonElement).toBeInTheDocument();
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getUserRepos } from '../services/github-web-api';
 import { UserItemType } from '../types';
@@ -9,6 +9,12 @@ const UserItem = ({ users, repos, setRepos }: UserItemType) => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const [loadingRepos, setReposLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (repos.length === 0) {
+      setExpanded(false);
+    }
+  }, [repos]);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {

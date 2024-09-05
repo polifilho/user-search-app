@@ -21,7 +21,9 @@ const UserItem = ({ users, repos, setRepos }: UserItemType) => {
       setExpanded(isExpanded ? panel : false);
     };
 
-  const handleUserClick = async (userName: any) => {
+  const handleUserClick = async (userName: string) => {
+    if (!userName) return;
+
     if (!repos.some((e) => e.userName === userName)) {
       setReposLoading(true);
       const userRepos = await getUserRepos(userName, 1);

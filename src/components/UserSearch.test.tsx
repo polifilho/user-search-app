@@ -21,7 +21,9 @@ describe('UserSearch Component', () => {
       />
     );
 
-    const inputElement = screen.getByRole('textbox', { name: /GitHub Username/i });
+    const inputElement = screen.getByRole('textbox', {
+      name: /GitHub Username/i,
+    });
     fireEvent.change(inputElement, { target: { value: 'newuser' } });
     expect(mockHandleChangeUserName).toHaveBeenCalledWith('newuser');
 

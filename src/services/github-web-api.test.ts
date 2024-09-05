@@ -5,7 +5,7 @@ jest.mock('axios');
 
 describe('API Services', () => {
   const githubAPI = process.env.REACT_APP_GITHUB_API_URL;
-  
+
   describe('searchUsers', () => {
     test('should return the users list', async () => {
       const mockResponse = {
@@ -57,47 +57,43 @@ describe('API Services', () => {
   describe('getUserRepos', () => {
     const githubAPI = process.env.REACT_APP_GITHUB_API_URL;
     const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
-  
+
     test('shoudl return the repositories from user', async () => {
       const mockResponse = {
-        data: [
-          { name: 'repo1' },
-          { name: 'repo2' },
-          { name: 'repo3' },
-        ],
+        data: [{ name: 'repo1' }, { name: 'repo2' }, { name: 'repo3' }],
       };
-  
+
       (axios.get as jest.Mock).mockResolvedValueOnce(mockResponse);
-  
+
       const repos = await getUserRepos('user1', 1);
-  
+
       expect(repos).toEqual(mockResponse.data);
       expect(axios.get).toHaveBeenCalledWith(
         `${githubAPI}/users/user1/repos?per_page=20&page=1`,
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
     });
-  
+
     test('should handle with an empty API response regarding repositories', async () => {
       const mockResponse = {
         data: [],
       };
-  
+
       (axios.get as jest.Mock).mockResolvedValueOnce(mockResponse);
-  
+
       const repos = await getUserRepos('user1', 1);
-  
+
       expect(repos).toEqual([]);
       expect(axios.get).toHaveBeenCalledWith(
         `${githubAPI}/users/user1/repos?per_page=20&page=1`,
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
     });
-  
+
     test('should throw an error if repositories API fails', async () => {
       (axios.get as jest.Mock).mockRejectedValueOnce(new Error('Erro na API'));
 
       await expect(getUserRepos('user1', 1)).rejects.toThrow('Erro na API');
     });
-  });  
+  });
 });

@@ -12,5 +12,6 @@ export const CONTENT = {
   },
   commons: {
     loadMore: 'Load More',
+    errorRequest: 'Sorry. Something is wrong, try again later!',
   },
 };

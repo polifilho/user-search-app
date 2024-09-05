@@ -9,9 +9,9 @@ This is a simple app to allows user to search for up to 5 users with a username 
 3. Now use the comands below to run or test the application
 
 ## Info
-This app use API Github, it means there is a limit of request, however you can create a file `.env` and set up you token like th example below:
+This app use API Github, it means there is a limit of request. It will works fine for now, however I recommend to create a file `.env` in the project root and set up your token like the example below:
 
-`REACT_APP_ACCESS_TOKEN={your-token-here-from-github}`
+`REACT_APP_ACCESS_TOKEN={your-Token}`
 
 ## Scripts
 

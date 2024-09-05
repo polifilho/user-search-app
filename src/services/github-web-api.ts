@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CONTENT } from '../communs';
 
-const githubAPI = process.env.REACT_APP_GITHUB_API_URL;
+const githubAPI = 'https://api.github.com';
 const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
 export const searchUsers = async (query: string) => {

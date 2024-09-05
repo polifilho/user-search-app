@@ -41,7 +41,7 @@ const UserSearch = ({
           disabled={loadingUsers}
         >
           {loadingUsers ? (
-            <CircularProgress size={24} />
+            <CircularProgress data-testid="loading-icon" size={24} />
           ) : (
             CONTENT.search.button
           )}
